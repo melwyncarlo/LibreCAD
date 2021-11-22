@@ -337,6 +337,7 @@ public:
         ActionSnapDist,
         ActionSnapIntersection,
         ActionSnapIntersectionManual,
+        ActionSnapPointLineIntersection,
 
         ActionRestrictNothing,
         ActionRestrictOrthogonal,

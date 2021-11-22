@@ -33,7 +33,7 @@
 #include <QAction>
 #include <QActionGroup>
 
-LC_ActionFactory::LC_ActionFactory(QObject* parent, QObject* a_handler)
+LC_ActionFactory::LC_ActionFactory(QObject* parent, QG_ActionHandler* a_handler)
     : QObject(parent)
     , using_theme(false)
     , main_window(parent)
@@ -114,6 +114,14 @@ void LC_ActionFactory::fillActionContainer(QMap<QString, QAction*>& a_map, LC_Ac
     action_handler, SLOT(slotDrawPoint()));
     action->setObjectName("DrawPoint");
     a_map["DrawPoint"] = action;
+
+
+    /* Snap Point Line Intersection */
+    action = new QAction(tr("Snap Point Line Intersection"), agm->line);
+    connect(action, &QAction::triggered, action_handler, &QG_ActionHandler::slotSnapPointLineIntersection);
+    action->setObjectName("SnapPointLineIntersection");
+    a_map["SnapPointLineIntersection"] = action;
+
 
     // <[~ Line ~]>
 
