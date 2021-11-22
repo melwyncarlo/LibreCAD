@@ -145,6 +145,7 @@
 #include "rs_actionsetsnapmode.h"
 #include "rs_actionsetsnaprestriction.h"
 #include "rs_actionsnapintersectionmanual.h"
+#include "rs_actionsnapbilinearintersection.h"
 #include "rs_actiontoolregeneratedimensions.h"
 #include "rs_actionzoomauto.h"
 #include "rs_actionzoomin.h"
@@ -228,6 +229,14 @@ RS_ActionInterface* QG_ActionHandler::setCurrentAction(RS2::ActionType id) {
                 "QG_ActionHandler::setCurrentAction: graphic view or "
                 "document is NULL");
         return NULL;
+    }
+
+    if (currentAppPen != nullptr)
+    {
+        document->setActivePen(*currentAppPen);
+
+        delete currentAppPen;
+        currentAppPen = nullptr;
     }
 
     auto a_layer = document->getLayerList()->getActive();
@@ -778,6 +787,16 @@ RS_ActionInterface* QG_ActionHandler::setCurrentAction(RS2::ActionType id) {
 //    case RS2::ActionSnapIntersectionManual:
 //        a = new RS_ActionSnapIntersectionManual(*document, *view);
 //        break;
+    case RS2::ActionSnapBilinearIntersection:
+        {
+            const RS_Color redPenColor = RS_Color(255,0,0);
+            currentAppPen = new RS_Pen();
+           *currentAppPen = document->getActivePen();
+            const RS_Pen snapBilinearIntersection_pen = RS_Pen(redPenColor, RS2::Width01, RS2::DashDotLineTiny);
+            document->setActivePen(snapBilinearIntersection_pen);
+            a = new RS_ActionSnapBilinearIntersection(*document, *view);
+        }
+        break;
 
         // Snap restriction actions:
         //
@@ -1733,6 +1752,10 @@ void QG_ActionHandler::slotSnapIntersectionManual() {
         snapToolBar->setSnapMode(RS2::SnapIntersectionManual);
 }*/
     //setCurrentAction(RS2::ActionSnapIntersectionManual);
+}
+
+void QG_ActionHandler::slotSnapBilinearIntersection() {
+    setCurrentAction(RS2::ActionSnapBilinearIntersection);
 }
 
 void QG_ActionHandler::disableSnaps() {

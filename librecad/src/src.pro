@@ -444,6 +444,7 @@ HEADERS += actions/rs_actionblocksadd.h \
     actions/rs_actionsetsnapmode.h \
     actions/rs_actionsetsnaprestriction.h \
     actions/rs_actionsnapintersectionmanual.h \
+    actions/rs_actionsnapbilinearintersection.h \
     actions/rs_actiontoolregeneratedimensions.h \
     actions/rs_actionzoomauto.h \
     actions/rs_actionzoomautoy.h \
@@ -579,6 +580,7 @@ SOURCES += actions/rs_actionblocksadd.cpp \
     actions/rs_actionsetsnapmode.cpp \
     actions/rs_actionsetsnaprestriction.cpp \
     actions/rs_actionsnapintersectionmanual.cpp \
+    actions/rs_actionsnapbilinearintersection.cpp \
     actions/rs_actiontoolregeneratedimensions.cpp \
     actions/rs_actionzoomauto.cpp \
     actions/rs_actionzoomautoy.cpp \
