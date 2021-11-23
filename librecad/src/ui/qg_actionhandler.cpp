@@ -788,14 +788,7 @@ RS_ActionInterface* QG_ActionHandler::setCurrentAction(RS2::ActionType id) {
 //        a = new RS_ActionSnapIntersectionManual(*document, *view);
 //        break;
     case RS2::ActionSnapPointLineIntersection:
-        {
-            const RS_Color redPenColor = RS_Color(255,0,0);
-            currentAppPen = new RS_Pen();
-           *currentAppPen = document->getActivePen();
-            const RS_Pen snapPointLineIntersection_pen = RS_Pen(redPenColor, RS2::Width01, RS2::DashDotLineTiny);
-            document->setActivePen(snapPointLineIntersection_pen);
-            a = new RS_ActionSnapPointLineIntersection(*document, *view);
-        }
+        a = new RS_ActionSnapPointLineIntersection(*document, *view);
         break;
 
         // Snap restriction actions:
