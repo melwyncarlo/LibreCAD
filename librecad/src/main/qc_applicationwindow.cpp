@@ -1483,17 +1483,15 @@ QC_MDIWindow* QC_ApplicationWindow::slotFileNew(RS_Document* doc) {
         view->setMenu(activator, menu);
     }
 
-    connect(view, SIGNAL(gridStatusChanged(const QString&)),
-            this, SLOT(updateGridStatus(const QString&)));
+    connect(view, &QG_GraphicView::gridStatusChanged, this, &QC_ApplicationWindow::updateGridStatus);
 
-    connect(view, SIGNAL(status_bar_widgets_visibility_request(bool)),
-            this, SLOT(status_bar_widgets_visibility(bool)));
+    connect( view, &QG_GraphicView::status_bar_widgets_visibility_request,
+             this, &QC_ApplicationWindow::status_bar_widgets_visibility);
 
     actionHandler->set_view(view);
     actionHandler->set_document(w->getDocument());
 
-    connect(w, SIGNAL(signalClosing(QC_MDIWindow*)),
-            this, SLOT(slotFileClosing(QC_MDIWindow*)));
+    connect(w, &QC_MDIWindow::signalClosing, this, &QC_ApplicationWindow::slotFileClosing);
 
     if (w->getDocument()->rtti()==RS2::EntityBlock) {
         w->setWindowTitle(tr("Block '%1'").arg(((RS_Block*)(w->getDocument()))->getName()) + "[*]");
