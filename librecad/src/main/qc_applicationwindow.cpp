@@ -129,8 +129,6 @@ QC_ApplicationWindow* QC_ApplicationWindow::appWindow = nullptr;
  *	*/
 #define WTB_MAX_SIZE        79
 
-#define DEFAULT_STATUS_BAR_MESSAGE_TIMEOUT 2000
-
 
 /**
  * Constructor. Initializes the app.
